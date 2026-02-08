@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lock & Doors - Cerrajería 24h en Castelldefels
 
-## Getting Started
+Bienvenido al repositorio oficial de **Lock & Doors**, tu cerrajería de confianza disponible **24 horas** en **Castelldefels**. Esta web está diseñada para ofrecer información clara, contacto inmediato y una experiencia visual elegante y moderna para quienes buscan servicios de cerrajería de calidad.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔑 Sobre la web
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Servicios**: Apertura de puertas, reparación de cerraduras, instalación de sistemas de seguridad y más.
+- **Cobertura**: Castelldefels y alrededores.
+- **Disponibilidad**: Servicio rápido y disponible 24/7.
+- **Estilo**: Minimalista y profesional, con diseño responsive para todo tipo de dispositivos.
+- **Interfaz**: Experiencia intuitiva y navegación sencilla.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Tecnología y SEO
 
-## Learn More
+- Desarrollada con **Next.js 16** y **React** para máxima velocidad y rendimiento.
+- Estilizada con **TailwindCSS 4** para un diseño moderno y adaptable.
+- Optimización SEO realizada con **Rank Math SEO** desde WordPress, incluyendo:
+  - Títulos y descripciones meta optimizados.
+  - URL canónicas.
+  - Open Graph para redes sociales.
+- Carga rápida de imágenes con `next/image`.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Lock & Doors** – Cerrajeros en Castelldefels disponibles 24h, confiables, rápidos y profesionales.  
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
