@@ -6,7 +6,7 @@ interface HeroProps { hero: { titulo: string; subtitulo: string; fondo: MediaIte
 
 export default function Hero({ hero }: HeroProps) {
   return (
-    <section className="relative h-screen flex items-center justify-center">
+    <section className="-mt-16 relative h-screen flex items-center justify-center">
       {hero.fondo?.node && <Image src={hero.fondo.node.sourceUrl} alt={hero.fondo.node.altText} fill className="object-cover" priority />}
       <div className="absolute inset-0 bg-black/50" />
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
