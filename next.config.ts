@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/wp-content/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cms.locksanddoors24h.com',
+        port: '',
+        pathname: '/wp-content/uploads/**',
+      },
     ],
   },
 };
