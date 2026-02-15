@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.locksanddoors24h.com', 
+        hostname: 'www.locksanddoors24h.com',
         port: '',
         pathname: '/wp-content/uploads/**',
       },
