@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-gray-900 py-10 mt-16">
+    <footer className="bg-white py-10 mt-16">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         {/* Logo / Nombre */}
         <div className="font-bold text-xl">
@@ -27,7 +27,7 @@ export default function Footer() {
         </nav>
 
         {/* Derechos */}
-        <div className="text-sm text-gray-300">
+        <div className="text-sm">
           © {new Date().getFullYear()} Lock & Doors. Todos los derechos reservados.
         </div>
       </div>
