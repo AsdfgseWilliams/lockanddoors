@@ -1,25 +1,14 @@
-import { gql } from "graphql-request";
-import { client } from "./graphql";
+// app/api/revalidate/route.ts
+import { revalidateTag } from 'next/cache'
+import { NextResponse } from 'next/server'
 
-/**
- * Obtiene SEO de cualquier página usando Rank Math
- */
-export async function getRankMathSEO(pageId: number) {
-  const query = gql`
-    query GetPageSEO($id: ID!) {
-      page(id: $id, idType: DATABASE_ID) {
-        seo {
-          title
-          description
-        }
-      }
-    }
-  `;
+export async function POST(req: Request) {
+  const secret = new URL(req.url).searchParams.get('secret')
 
-  const data = await client.request(query, { id: pageId });
+  if (secret !== process.env.REVALIDATION_SECRET) {
+    return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
+  }
 
-  return {
-    title: data.page.seo.title || "",
-    description: data.page.seo.description || "",
-  };
+  revalidateTag('wordpress-content')
+  return NextResponse.json({ revalidated: true })
 }
