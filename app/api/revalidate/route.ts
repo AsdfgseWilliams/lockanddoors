@@ -1,5 +1,4 @@
-// app/api/revalidate/route.ts
-import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -9,6 +8,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
   }
 
-  revalidateTag('wordpress-content')
+  revalidatePath('/', 'layout')
   return NextResponse.json({ revalidated: true })
 }
