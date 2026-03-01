@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@components/Button";
+import { Button } from "@/app/components/shared/cta/Button";
 
 interface MediaItem { node: { sourceUrl: string; altText: string } }
 interface HeroProps { hero: { titulo: string; subtitulo: string; fondo: MediaItem; textoBoton1: string; enlaceBoton1: string; textoBoton2: string; enlaceBoton2: string } }

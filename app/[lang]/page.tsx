@@ -1,7 +1,7 @@
 import { client } from "@lib/graphql";
 import { gql } from "graphql-request";
 import Hero from "@components/home/Hero";
-import { getRankMathSEO } from "@lib/seo";
+import { getRankMathSEO } from "@/lib/seo/seo";
 
 interface MediaItem { node: { sourceUrl: string; altText: string } }
 interface HeroData { titulo: string; subtitulo: string; fondo: MediaItem; textoBoton1: string; enlaceBoton1: string; textoBoton2: string; enlaceBoton2: string }

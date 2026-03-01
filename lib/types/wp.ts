@@ -17,3 +17,17 @@ export async function getMenu(location: string) {
   const data = await client.request(query, { location });
   return data.menuItems.nodes;
 }
+
+export type RankMathRedirection = {
+  fromUrl: string
+  toUrl: string
+  redirectType: number | null
+}
+
+export type RankMathRedirectionsResponse = {
+  data: {
+    rankMathRedirections: {
+      nodes: RankMathRedirection[]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import { client } from "./graphql";
+import { client } from "../graphql";
 
 /**
  * Obtiene SEO de cualquier página usando Rank Math

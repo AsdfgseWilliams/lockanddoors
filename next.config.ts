@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  i18n: undefined,
 };
 
 export default nextConfig;
