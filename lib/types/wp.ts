@@ -2,7 +2,14 @@ import { GraphQLClient, gql } from "graphql-request";
 
 const client = new GraphQLClient("https://cms.locksanddoors24h.com/graphql");
 
-export async function getMenu(location: string) {
+export async function getMenu(lang: string = 'es') {
+  const locationMap: Record<string, string> = {
+    es: 'PRIMARY',
+    en: 'PRIMARY___EN',
+  }
+
+  const location = locationMap[lang] ?? 'PRIMARY'
+
   const query = gql`
     query GetMenu($location: MenuLocationEnum!) {
       menuItems(where: { location: $location }) {
@@ -14,6 +21,7 @@ export async function getMenu(location: string) {
       }
     }
   `;
+
   const data = await client.request(query, { location });
   return data.menuItems.nodes;
 }
