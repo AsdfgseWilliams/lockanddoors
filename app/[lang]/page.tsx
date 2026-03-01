@@ -4,11 +4,21 @@ import Hero from "@/app/components/home/Hero";
 import { getRankMathSEO } from "@/lib/seo/seo";
 import type { Locale } from "@/lib/types/i18n";
 import { withFallback } from "@/lib/utils/i18nFallback"
+import ServiciosDestacados from "@/app/components/home/ServiciosDestacados";
+import { transformServiciosDestacados } from "@/lib/transformers/servicio.transformer";
 
 interface MediaItem { node: { sourceUrl: string; altText: string } }
 interface HeroData { titulo: string; subtitulo: string; fondo: MediaItem; textoBoton1: string; enlaceBoton1: string; textoBoton2: string; enlaceBoton2: string }
-interface HomeACF { hero: HeroData }
+interface HomeACF {
+  hero: HeroData;
+  destacados: { nodes: ServicioDestacado[] }; // ← añadir esto
+}
 interface HomePageData { page: { translation: { home: HomeACF } } }
+interface ServicioDestacado {
+  slug: string;
+  title: string;
+  excerpt: string;
+}
 
 const langToWP: Record<Locale, string> = {
   es: 'ES',
@@ -27,16 +37,25 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
     query GetHomePage($lang: LanguageCodeEnum!) {
       page(id: 2, idType: DATABASE_ID) {
         translation(language: $lang) {
-          home { 
-            hero { 
-              titulo 
-              subtitulo 
-              fondo { node { sourceUrl altText } } 
-              textoBoton1 
-              enlaceBoton1 
-              textoBoton2 
-              enlaceBoton2 
-            } 
+          home {
+            hero {
+              titulo
+              subtitulo
+              fondo { node { sourceUrl altText } }
+              textoBoton1
+              enlaceBoton1
+              textoBoton2
+              enlaceBoton2
+            }
+            destacados {          # ← campo ACF relationship
+              nodes {
+                ... on Servicio {
+                  slug
+                  title
+                  excerpt
+                }
+              }
+            }
           }
         }
       }
@@ -59,6 +78,12 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
   return (
     <div className="min-h-screen">
       <Hero hero={hero} lang={lang} />
+      <ServiciosDestacados
+      lang={lang}
+      servicios={transformServiciosDestacados(
+        data.page.translation?.home?.destacados?.nodes ?? []
+      )}
+    />
     </div>
   );
 }
