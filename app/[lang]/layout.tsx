@@ -18,9 +18,10 @@ export default async function LangLayout({
   params,
 }: {
   children: React.ReactNode
-  params: Promise<{ lang: Locale }>
+  params: Promise<{ lang: string }>
 }) {
-  const { lang } = await params  // ← await aquí, era el problema principal
+  const { lang: langParam } = await params
+  const lang = (langParam as Locale)
 
   const query = `
     query HeaderOptions {
