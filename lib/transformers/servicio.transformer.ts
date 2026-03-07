@@ -5,21 +5,20 @@ import type { Servicio, ServicioRaw } from "@/lib/types/servicio";
 
 // Mapa de iconos por slug — se amplía según se creen los posts en WP
 const ICONOS: Record<string, string> = {
-  "apertura-puertas-urgentes":  "🚨",
-  "instalacion-cerraduras":     "🔐",
-  "reparacion-cerraduras":      "🔧",
-  "bombines-alta-seguridad":    "🛡️",
-  "cerrajeria-comunidades":     "🏢",
-  "motorizacion-persianas":     "⚙️",
-  "lanzamientos-judiciales":    "⚖️",
-  "instalacion-rejas":          "🪟",
-  "cajas-fuertes":              "🔒",
-  "sistemas-alarma":            "🔔",
-  "cerraduras-inteligentes":    "📱",
+  "apertura-de-puertas-urgentes-24h":          "🚨",
+  "instalacion-de-nuevas-cerraduras":           "🔐",
+  "reparaciones-de-cerraduras":                 "🔧",
+  "instalacion-de-bombines-de-alta-seguridad":  "🛡️",
+  "servicio-de-cerrajeria-a-comunidades":       "🏢",
+  "motorizacion-de-persianas":                  "⚙️",
+  "lanzamientos-judiciales":                    "⚖️",
+  "instalacion-de-rejas":                       "🪟",
+  "apertura-y-reparacion-de-cajas-fuertes":     "🔒",
+  "sistemas-de-alarma-sin-cuotas":              "🔔",
+  "instalacion-de-cerraduras-inteligentes":     "📱",
 };
 
-// Slugs que muestran el badge 24h
-const URGENTES = new Set(["apertura-puertas-urgentes"]);
+const URGENTES = new Set(["apertura-de-puertas-urgentes-24h"]);
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, "").trim();

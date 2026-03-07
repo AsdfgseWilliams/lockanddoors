@@ -7,64 +7,24 @@ import Link from "next/link";
 import ServicioGrid from "@/app/components/servicios/ServicioGrid";
 import type { Servicio } from "@/lib/types/servicio";
 
-// Fallback para cuando WP no tiene posts destacados configurados todavía
-const FALLBACK: Servicio[] = [
-  {
-    slug: "apertura-puertas-urgentes",
-    titulo: "Apertura de Puertas 24h",
-    icono: "🚨",
-    descripcionCorta: "Bloqueado fuera de casa o del trabajo. Llegamos en menos de 30 minutos, cualquier hora.",
-    urgente: true,
-  },
-  {
-    slug: "instalacion-cerraduras",
-    titulo: "Instalación de Cerraduras",
-    icono: "🔐",
-    descripcionCorta: "Montamos la cerradura más adecuada para tu puerta, con garantía de instalación.",
-  },
-  {
-    slug: "reparacion-cerraduras",
-    titulo: "Reparación de Cerraduras",
-    icono: "🔧",
-    descripcionCorta: "Cerradura forzada, dañada o desgastada. La diagnosticamos y dejamos como nueva.",
-  },
-  {
-    slug: "bombines-alta-seguridad",
-    titulo: "Bombines Alta Seguridad",
-    icono: "🛡️",
-    descripcionCorta: "Protección máxima contra bumping, ganzúa y rotura de cilindro. Marcas certificadas.",
-  },
-  {
-    slug: "cerrajeria-comunidades",
-    titulo: "Cerrajería para Comunidades",
-    icono: "🏢",
-    descripcionCorta: "Mantenimiento, accesos y seguridad integral para portales y zonas comunes.",
-  },
-  {
-    slug: "cerraduras-inteligentes",
-    titulo: "Cerraduras Inteligentes",
-    icono: "📱",
-    descripcionCorta: "Abre con el móvil, huella o código. Instalación y configuración incluidas.",
-  },
-];
-
 interface ServiciosDestacadosProps {
   lang: string;
-  servicios?: Servicio[];
-  titulo?: string;
-  subtitulo?: string;
-  ctaTexto?: string;
+  servicios: Servicio[];
+  titulo: string;
+  subtitulo: string;
+  ctaTexto: string;
 }
 
 export default function ServiciosDestacados({
   lang,
   servicios,
-  titulo = "Servicios profesionales de cerrajería",
-  subtitulo = "Soluciones completas para tu hogar, negocio o comunidad. Trabajamos con las mejores marcas del sector.",
-  ctaTexto = "Ver todos los servicios",
+  titulo,
+  subtitulo,
+  ctaTexto,
 }: ServiciosDestacadosProps) {
-  const items = servicios?.length ? servicios : FALLBACK;
+  const items = servicios;
 
+  if (!items.length) return null; 
   return (
     <section
       className="bg-white py-16 md:py-24"
