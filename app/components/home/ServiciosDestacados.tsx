@@ -12,7 +12,7 @@ interface ServiciosDestacadosProps {
   servicios: Servicio[];
   titulo: string;
   subtitulo: string;
-  ctaTexto: string;
+  ctaTexto?: string;
 }
 
 export default function ServiciosDestacados({

@@ -8,22 +8,21 @@ import ServiciosDestacados from "@/app/components/home/ServiciosDestacados";
 import UrgenciasSection from "@/app/components/home/UrgenciasSection";
 import { transformServiciosDestacados } from "@/lib/transformers/servicio.transformer";
 import { getDictionary } from "@/lib/getDictionary";
+import ZonasCobertura from '@/app/components/home/ZonasCobertura';
+import type {
+  OpcionesData,
+  HomePageData,
+  TipoBoton,
+} from '@/lib/types/wordpress';
 
 interface MediaItem { node: { sourceUrl: string; altText: string } }
 
-interface OpcionesData {
-  telefono: string;
-  whatsapp: string;
-  email: string;
-}
 
 interface HeroData {
   titulo: string; subtitulo: string; fondo: MediaItem;
   textoBoton1: string; enlaceBoton1: string;
   textoBoton2: string; enlaceBoton2: string;
 }
-
-type TipoBoton = 'Teléfono' | 'Whatsapp' | 'Email' | 'Formulario' | 'Otro';
 
 interface UrgenciasRaw {
   titulo: string;
@@ -39,28 +38,6 @@ interface UrgenciasRaw {
 interface BotonResuelto {
   href: string;
   label: string;
-}
-
-interface ServicioDestacado {
-  slug: string; title: string; excerpt: string;
-}
-
-interface HomeACF {
-  hero: HeroData;
-  contenido: ContenidoData;
-  destacados: { nodes: ServicioDestacado[] };
-  urgencias: UrgenciasRaw;
-}
-
-interface HomePageData {
-  page: { translation: { home: HomeACF } };
-  opciones: { paGinaDeOpciones: OpcionesData };
-}
-
-interface ContenidoData {
-  titulo: string;
-  subtitulo: string;
-  textoBoton1: string;
 }
 
 const langToWP: Record<Locale, string> = { es: 'ES', en: 'EN' }
@@ -95,35 +72,23 @@ function resolveBoton(
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }) {
-  const { lang: _ } = await params
+  await params
   return await getRankMathSEO(2)
 }
 
 export default async function Home({ params }: { params: Promise<{ lang: Locale }> }) {
   const { lang } = await params
 
-  const query = gql`
-    query GetHomePage($lang: LanguageCodeEnum!) {
-      page(id: 2, idType: DATABASE_ID) {
-        translation(language: $lang) {
-          home {
-            hero {
-              titulo
-              subtitulo
-              fondo { node { sourceUrl altText } }
-              textoBoton1
-              enlaceBoton1
-              textoBoton2
-              enlaceBoton2
-            }
-            destacados {
-              nodes {
-                ... on Servicio { slug title excerpt }
-              }
-            }
-            urgencias {
-              titulo
-              subtitulo
+const query = gql`
+  query GetHomePage($lang: LanguageCodeEnum!) {
+    page(id: 2, idType: DATABASE_ID) {
+      translation(language: $lang) {
+        home {
+          hero {
+            titulo
+            subtitulo
+            fondo { node { sourceUrl altText } }
+            botonesHero {
               boton_1
               textoBoton1
               enlaceBoton1
@@ -131,23 +96,57 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
               textoBoton2
               enlaceBoton2
             }
-            contenido {
-              titulo
-              subtitulo
-              textoBoton1
+          }
+          destacados {
+            nodes {
+              ... on Servicio { slug title excerpt }
+            }
+          }
+          urgencias {
+            titulo
+            subtitulo
+            boton_1
+            textoBoton1
+            enlaceBoton1
+            boton2
+            textoBoton2
+          }
+          contenido {
+            titulo
+            subtitulo
+            textoBoton1
+          }
+          titulo
+          subtitulo
+          botonesZonas {
+            boton_1
+            textoBoton1
+            enlaceBoton1
+            boton2
+            textoBoton2
+            enlaceBoton2
+          }
+          zonasDeCobertura {
+            nodes {
+              ... on Ubicacion {
+                id
+                title
+                slug
+              }
             }
           }
         }
       }
-      opciones: page(id: 17, idType: DATABASE_ID) {
-        paGinaDeOpciones {
-          telefono
-          whatsapp
-          email
-        }
+    }
+    opciones: page(id: 17, idType: DATABASE_ID) {
+      paGinaDeOpciones {
+        telefono
+        whatsapp
+        email
       }
     }
-  `
+  }
+`
 
   const [data, dict] = await Promise.all([
     client.request<HomePageData>(query, { lang: langToWP[lang] }),
@@ -155,7 +154,6 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
   ])
 
   const homeRaw = data.page.translation?.home
-  console.log('destacados nodes:', JSON.stringify(homeRaw?.destacados?.nodes, null, 2))
   const opcionesData = data.opciones?.paGinaDeOpciones
 
   let hero = homeRaw?.hero
@@ -200,9 +198,38 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
       )
     : null
 
+    const heroBoton1 = hero?.botonesHero && opcionesData
+  ? resolveBoton(
+      (Array.isArray(hero.botonesHero.boton_1)
+        ? hero.botonesHero.boton_1[0]
+        : hero.botonesHero.boton_1) as TipoBoton,
+      opcionesData,
+      dict.contacto,
+      hero.botonesHero.textoBoton1,
+      hero.botonesHero.enlaceBoton1
+    )
+  : null
+
+const heroBoton2 = hero?.botonesHero && opcionesData
+  ? resolveBoton(
+      (Array.isArray(hero.botonesHero.boton2)
+        ? hero.botonesHero.boton2[0]
+        : hero.botonesHero.boton2) as TipoBoton,
+      opcionesData,
+      dict.contacto,
+      hero.botonesHero.textoBoton2,
+      hero.botonesHero.enlaceBoton2
+    )
+  : null
+
   return (
     <div className="min-h-screen">
-      <Hero hero={hero} lang={lang} />
+      <Hero
+        hero={hero}
+        boton1={heroBoton1}
+        boton2={heroBoton2}
+        lang={lang}
+      />
       <ServiciosDestacados lang={lang}
         servicios={transformServiciosDestacados(homeRaw?.destacados?.nodes ?? [])}
         titulo={homeRaw?.contenido?.titulo}
@@ -214,6 +241,13 @@ export default async function Home({ params }: { params: Promise<{ lang: Locale 
         subtitulo={urgencias?.subtitulo ?? ''}
         boton1={boton1}
         boton2={boton2}
+      />
+      <ZonasCobertura
+        titulo={homeRaw?.titulo}
+        subtitulo={homeRaw?.subtitulo}
+        zonas={homeRaw?.zonasDeCobertura}
+        botones={homeRaw?.botonesZonas}
+        opciones={opcionesData}
       />
     </div>
   )

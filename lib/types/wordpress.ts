@@ -1,4 +1,4 @@
-// types/wordpress.ts (VERSIÓN CORREGIDA)
+// types/wordpress.ts
 // Tipos compartidos para los datos de WordPress ACF con WPGraphQL
 
 // Las imágenes en ACF GraphQL vienen envueltas en un objeto "node"
@@ -15,10 +15,14 @@ export interface HeroData {
   titulo: string;
   subtitulo: string;
   fondo: MediaItem;
-  textoBoton1?: string;
-  enlaceBoton1?: string;
-  textoBoton2?: string;
-  enlaceBoton2?: string;
+  botonesHero?: {
+    boton_1: TipoBoton;
+    textoBoton1?: string;
+    enlaceBoton1?: string;
+    boton2: TipoBoton;
+    textoBoton2?: string;
+    enlaceBoton2?: string;
+  };
 }
 
 export interface Servicio {
@@ -71,25 +75,45 @@ export interface FAQItem {
   respuesta: string;
 }
 
-// Las relaciones también vienen envueltas en nodes
-export interface ZonaNode {
-  node: {
-    id: string;
-    title: string;
-    slug: string;
-  };
-}
 
 export interface ZonasCobertura {
   nodes: ZonaNode[];
 }
 
+export interface DestacadosData {
+  nodes: Array<{ slug: string; title: string; excerpt: string }>;
+}
+
+export interface ContenidoData {
+  titulo: string;
+  subtitulo: string;
+  textoBoton1?: string;
+  enlaceBoton1?: string;
+  textoBoton2?: string;
+  enlaceBoton2?: string;
+}
+
+export interface UrgenciasData {
+  titulo: string;
+  subtitulo: string;
+  boton_1: TipoBoton | TipoBoton[];
+  textoBoton1?: string;
+  enlaceBoton1?: string;
+  boton2: TipoBoton | TipoBoton[];
+  textoBoton2?: string;
+  enlaceBoton2?: string;
+}
+
+
 export interface HomeACF {
   hero: HeroData;
-  servicios: ServiciosData;
-  testimonios: TestimoniosData;
-  faq: FAQData;
-  zonasDeCobertura: ZonasCobertura;
+  destacados: DestacadosData;
+  contenido: ContenidoData;
+  urgencias: UrgenciasData;
+  titulo?: string;
+  subtitulo?: string;
+  zonasDeCobertura?: ZonasDeCobertura;
+  botonesZonas?: BotonesData;
 }
 
 export interface PageData {
@@ -97,4 +121,46 @@ export interface PageData {
     title: string;
     home: HomeACF;
   };
+}
+
+// Botones con selector tipo (Teléfono | Whatsapp | Email | Formulario | Otro)
+export type TipoBoton = 'Teléfono' | 'Whatsapp' | 'Email' | 'Formulario' | 'Otro';
+
+export interface BotonesData {
+  boton_1: TipoBoton | TipoBoton[];
+  textoBoton1?: string;
+  enlaceBoton1?: string;
+  boton2: TipoBoton | TipoBoton[];
+  textoBoton2?: string;
+  enlaceBoton2?: string;
+}
+
+// Zona de cobertura (relationship post tipo ubicacion)
+export interface ZonaNode {
+  id: string;
+  title: string;
+  slug: string;
+}
+
+export interface ZonasDeCobertura {
+  nodes: ZonaNode[];
+}
+
+// Sección zonas en HomeACF
+export interface ZonasCoberturaACF {
+  titulo: string;
+  subtitulo: string;
+  zonasDeCobertura: ZonasDeCobertura;
+  botonesZonas: BotonesData;
+}
+
+export interface OpcionesData {
+  telefono: string;
+  whatsapp: string;
+  email: string;
+}
+
+export interface HomePageData {
+  page: { translation: { home: HomeACF } };
+  opciones: { paGinaDeOpciones: OpcionesData };
 }
