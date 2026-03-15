@@ -11,15 +11,15 @@ export function FormPresupuesto({ servicio }: Props) {
   const { register, formState: { errors } } = form
 
   return (
-    <section className="bg-[var(--color-surface)] py-16 px-4">
+    <section className="bg-surface py-16 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
         {/* Formulario */}
         <div>
-          <h2 className="text-h2 font-bold text-[var(--color-primary)] mb-2">
+          <h2 className="text-h2 font-bold text-primary mb-2">
             Solicita tu presupuesto
           </h2>
-          <p className="text-[var(--color-text-light)] mb-8">
+          <p className="text-text-light mb-8">
             Sin compromiso. Te respondemos en menos de 30 minutos.
           </p>
 
@@ -29,7 +29,7 @@ export function FormPresupuesto({ servicio }: Props) {
                 <input
                   {...register('nombre', { required: 'Nombre obligatorio' })}
                   placeholder="Nombre completo"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-secondary)]"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary"
                 />
                 {errors.nombre && (
                   <span className="text-red-500 text-xs mt-1">{errors.nombre.message}</span>
@@ -40,7 +40,7 @@ export function FormPresupuesto({ servicio }: Props) {
                   {...register('telefono', { required: 'Teléfono obligatorio' })}
                   placeholder="Teléfono"
                   type="tel"
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-secondary)]"
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary"
                 />
                 {errors.telefono && (
                   <span className="text-red-500 text-xs mt-1">{errors.telefono.message}</span>
@@ -52,20 +52,20 @@ export function FormPresupuesto({ servicio }: Props) {
               {...register('email')}
               placeholder="Email (opcional)"
               type="email"
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-secondary)]"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary"
             />
 
             <textarea
               {...register('mensaje')}
               placeholder="Cuéntanos qué necesitas..."
               rows={4}
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-secondary)] resize-none"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-secondary resize-none"
             />
 
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="bg-[var(--color-secondary)] text-white font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition disabled:opacity-50"
+              className="bg-secondary text-white font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition disabled:opacity-50"
             >
               {status === 'loading' ? 'Enviando...' : 'Enviar consulta'}
             </button>
@@ -84,9 +84,9 @@ export function FormPresupuesto({ servicio }: Props) {
         </div>
 
         {/* CTA lateral — emergencias */}
-        <div className="bg-[var(--color-primary)] rounded-2xl p-8 text-white flex flex-col gap-6">
+        <div className="bg-primary rounded-2xl p-8 text-white flex flex-col gap-6">
           <div>
-            <span className="text-[var(--color-secondary)] text-sm font-semibold uppercase tracking-wider">
+            <span className="text-secondary text-sm font-semibold uppercase tracking-wider">
               ¿Emergencia?
             </span>
             <h3 className="text-h3 font-bold mt-1">
@@ -99,7 +99,7 @@ export function FormPresupuesto({ servicio }: Props) {
 
           
             <a href="tel:644189289"
-            className="flex items-center gap-3 bg-[var(--color-secondary)] text-white font-bold py-4 px-6 rounded-xl hover:opacity-90 transition text-lg"
+            className="flex items-center gap-3 bg-secondary text-white font-bold py-4 px-6 rounded-xl hover:opacity-90 transition text-lg"
           >
             📞 644 189 289
           </a>
