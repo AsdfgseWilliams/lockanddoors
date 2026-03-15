@@ -150,8 +150,8 @@ function TarjetaResena({
       <Estrellas n={resena.estrellas} />
 
       {/* Texto */}
-      <blockquote className="text-sm text-[#374151] leading-relaxed flex-1">
-        "{resena.texto}"
+      <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
+        &ldquo;{resena.texto}&rdquo;
       </blockquote>
 
       {/* Etiqueta de servicio */}
