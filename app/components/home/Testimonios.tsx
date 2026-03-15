@@ -97,7 +97,7 @@ function Estrellas({ n }: { n: number }) {
 function Avatar({ iniciales, color }: { iniciales: string; color: string }) {
   return (
     <div
-      className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+      className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
       style={{ backgroundColor: color }}
       aria-hidden="true"
     >
@@ -135,13 +135,13 @@ function TarjetaResena({
           color={AVATAR_COLORS[index % AVATAR_COLORS.length]}
         />
         <div className="min-w-0">
-          <p className="font-semibold text-[#121924] text-sm leading-tight truncate">
+          <p className="font-semibold text-text text-sm leading-tight truncate">
             {resena.nombre}
           </p>
-          <p className="text-xs text-[#64748B] mt-0.5">{resena.fecha}</p>
+          <p className="text-xs text-text-light mt-0.5">{resena.fecha}</p>
         </div>
         {/* Logo Google — derecha */}
-        <div className="ml-auto flex-shrink-0">
+        <div className="ml-auto shrink-0">
           <GoogleIcon />
         </div>
       </div>
@@ -156,7 +156,7 @@ function TarjetaResena({
 
       {/* Etiqueta de servicio */}
       <div className="mt-auto">
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#0A2463] bg-blue-50 px-3 py-1 rounded-full">
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-blue-50 px-3 py-1 rounded-full">
           <svg
             width="12"
             height="12"
@@ -241,12 +241,12 @@ export default function TestimonialsSection({
       ref={sectionRef}
       id="testimonios"
       aria-labelledby="testimonios-titulo"
-      className="bg-[#F8FAFC] py-20 px-4"
+      className="bg-surface py-20 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* Etiqueta de sección */}
         <div className="flex justify-center mb-4">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#64748B] uppercase tracking-widest bg-white border border-slate-200 px-4 py-1.5 rounded-full shadow-sm">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-text-light uppercase tracking-widest bg-white border border-slate-200 px-4 py-1.5 rounded-full shadow-sm">
             <svg
               width="14"
               height="14"
@@ -274,11 +274,11 @@ export default function TestimonialsSection({
         >
           <h2
             id="testimonios-titulo"
-            className="text-h2 font-bold text-[#0A2463] mb-4"
+            className="text-h2 font-bold text-primary mb-4"
           >
             {titulo}
           </h2>
-          <p className="text-[#64748B] text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-text-light text-base max-w-2xl mx-auto leading-relaxed">
             {subtitulo}
           </p>
         </div>
@@ -302,16 +302,16 @@ export default function TestimonialsSection({
             <GoogleIcon />
             <div className="flex flex-col gap-0.5">
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-[#121924]">
+                <span className="text-2xl font-bold text-text">
                   {puntuacion.toFixed(1)}
                 </span>
                 <Estrellas n={Math.round(puntuacion)} />
               </div>
-              <span className="text-xs text-[#64748B]">
+              <span className="text-xs text-text-light">
                 {totalResenas}+ reseñas en Google
               </span>
             </div>
-            <span className="ml-2 text-xs font-semibold text-[#0A2463] group-hover:text-[#FB8500] transition-colors duration-200">
+            <span className="ml-2 text-xs font-semibold text-primary group-hover:text-secondary transition-colors duration-200">
               Ver todas →
             </span>
           </a>
@@ -341,7 +341,7 @@ export default function TestimonialsSection({
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#64748B] hover:text-[#0A2463] transition-colors duration-200 underline underline-offset-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-text-light hover:text-primary transition-colors duration-200 underline underline-offset-4"
           >
             <GoogleIcon />
             Ver más reseñas en Google Maps

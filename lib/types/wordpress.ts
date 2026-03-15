@@ -116,6 +116,10 @@ export interface HomeACF {
   ctaSubtitulo?: string;
   zonasDeCobertura?: ZonasDeCobertura;
   botonesZonas?: BotonesData;
+  tituloResenas?: string;
+  subtituloResenas?: string;
+  ventajas?: VentajasData;
+  botonesVentajas?: BotonesData;
 }
 
 export interface PageData {
@@ -154,6 +158,37 @@ export interface ZonasCoberturaACF {
   subtitulo: string;
   zonasDeCobertura: ZonasDeCobertura;
   botonesZonas: BotonesData;
+}
+
+// Ventaja individual
+export interface VentajaItem {
+  icono: string;
+  titulo: string;
+  texto: string;
+}
+
+// Datos de ventajas del ACF (campo group "ventajas")
+export interface VentajasData {
+  titulo: string;
+  subtitulo: string;
+  icono1?: MediaItem;
+  ventaja1?: string;
+  ventaja1Texto?: string;
+  icono2?: MediaItem;
+  ventaja2?: string;
+  ventaja2Texto?: string;
+  icono3?: MediaItem;
+  ventaja3?: string;
+  ventaja3Texto?: string;
+  icono4?: MediaItem;
+  ventaja4?: string;
+  ventaja4Texto?: string;
+  icono5?: MediaItem;
+  ventaja5?: string;
+  ventaja5Texto?: string;
+  icono6?: MediaItem;
+  ventaja6?: string;
+  ventaja6Texto?: string;
 }
 
 export interface OpcionesData {
