@@ -9,6 +9,7 @@ import UrgenciasSection from "@/app/components/home/UrgenciasSection";
 import { transformServiciosDestacados } from "@/lib/transformers/servicio.transformer";
 import { getDictionary } from "@/lib/getDictionary";
 import ZonasCobertura from '@/app/components/home/ZonasCobertura';
+import TestimonialsSection  from '@/app/components/home/Testimonios';
 import type {
   OpcionesData,
   HomePageData,
@@ -118,6 +119,8 @@ const query = gql`
           }
           titulo
           subtitulo
+          ctaTitulo
+          ctaSubtitulo
           botonesZonas {
             boton_1
             textoBoton1
@@ -134,7 +137,7 @@ const query = gql`
                 slug
               }
             }
-          }
+          }         
         }
       }
     }
@@ -245,9 +248,16 @@ const heroBoton2 = hero?.botonesHero && opcionesData
       <ZonasCobertura
         titulo={homeRaw?.titulo}
         subtitulo={homeRaw?.subtitulo}
+        ctaTitulo={homeRaw?.ctaTitulo}
+        ctaSubtitulo={homeRaw?.ctaSubtitulo}
         zonas={homeRaw?.zonasDeCobertura}
         botones={homeRaw?.botonesZonas}
         opciones={opcionesData}
+      />
+      <TestimonialsSection
+        googleMapsUrl="https://maps.app.goo.gl/WHfRy5BWcMiKggUQ8"
+        puntuacion={5.0}
+        totalResenas={20}
       />
     </div>
   )

@@ -112,6 +112,8 @@ export interface HomeACF {
   urgencias: UrgenciasData;
   titulo?: string;
   subtitulo?: string;
+  ctaTitulo?: string;   
+  ctaSubtitulo?: string;
   zonasDeCobertura?: ZonasDeCobertura;
   botonesZonas?: BotonesData;
 }

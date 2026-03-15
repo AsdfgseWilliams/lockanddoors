@@ -8,7 +8,7 @@ import { resolveBotonUrl, resolveBotonTexto } from '@/lib/utils/whatsapp';
 const MapaCobertura = dynamic(() => import('./MapaCobertura'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full min-h-105 rounded-xl bg-[#F0F4F8] animate-pulse flex items-center justify-center">
+    <div className="w-full h-full min-h-105 rounded-xl bg-slate-100 animate-pulse flex items-center justify-center">
       <span className="text-text-light text-sm">Cargando mapa...</span>
     </div>
   ),
@@ -33,12 +33,14 @@ const ZONA_COLORS: Record<string, { color: string; label: string }> = {
 interface ZonasCoberturaProps {
   titulo?: string;
   subtitulo?: string;
+  ctaTitulo?: string;
+  ctaSubtitulo?: string;
   zonas?: { nodes: ZonaNode[] };
   botones?: BotonesData;
   opciones?: OpcionesData;
 }
 
-export default function ZonasCobertura({ titulo, subtitulo, zonas, botones, opciones }: ZonasCoberturaProps) {
+export default function ZonasCobertura({ titulo, subtitulo, ctaTitulo, ctaSubtitulo, zonas, botones, opciones }: ZonasCoberturaProps) {
   const nodos: ZonaNode[] = zonas?.nodes ?? [];
 
   // Agrupar municipios por zona visual
@@ -85,7 +87,7 @@ export default function ZonasCobertura({ titulo, subtitulo, zonas, botones, opci
         {/* Grid: mapa + leyenda */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div
-            className="lg:col-span-2 rounded-xl overflow-hidden shadow-md border border-[#E2E8F0]"
+            className="lg:col-span-2 h-full rounded-xl overflow-hidden shadow-md border border-slate-200"
             style={{ minHeight: '420px' }}
           >
             <MapaCobertura />
@@ -93,7 +95,7 @@ export default function ZonasCobertura({ titulo, subtitulo, zonas, botones, opci
 
           <div className="flex flex-col gap-6">
             {grupos.map((grupo) => (
-              <div key={grupo.label} className="bg-white rounded-xl p-5 shadow-sm border border-[#E2E8F0]">
+              <div key={grupo.label} className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className="inline-block w-3 h-3 rounded-full shrink-0"
@@ -122,8 +124,8 @@ export default function ZonasCobertura({ titulo, subtitulo, zonas, botones, opci
         {/* CTA */}
         <div className="mt-12 bg-primary rounded-2xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="text-left">
-            <p className="text-white text-lg font-bold mb-1">¿Estás en nuestra zona?</p>
-            <p className="text-[#93C5FD] text-sm">Solicita presupuesto sin compromiso. Respondemos en minutos.</p>
+            <p className="text-white text-lg font-bold mb-1">{ctaTitulo ?? '¿Estás en nuestra zona?'}</p>
+            <p className="text-blue-300 text-sm">{ctaSubtitulo ?? 'Solicita presupuesto sin compromiso. Respondemos en minutos.'}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             {url1 && (
@@ -141,7 +143,7 @@ export default function ZonasCobertura({ titulo, subtitulo, zonas, botones, opci
                 href={url2}
                 target={botones?.boton2 === 'Whatsapp' ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-secondary hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                className="inline-flex items-center gap-2 bg-white hover:bg-white/80 text-primary font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
               >
                 {txt2}
               </a>
